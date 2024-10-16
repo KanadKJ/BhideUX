@@ -1,0 +1,101 @@
+.p-wrapper {
+  height: 48px;
+  width: 48px;
+  background: #515050c6;
+  border-radius: 25px;
+  padding: 0px 22px;
+}
+.dots {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 50%;
+}
+.dot {
+  width: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: bisque;
+}
+.dot:nth-child(1) {
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+}
+.dot:nth-child(4) {
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+}
+.dot:nth-child(8) {
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+}
+.dot:nth-child(12) {
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+}
+.dot:nth-child(17) {
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+}
+.dotsProgress {
+  display: flex;
+  position: relative;
+  top: -64%;
+  left: -12px;
+  appearance: none;
+  outline: none;
+  background-color: #0000;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #dddddd00;
+  outline: none;
+  border-radius: 5px;
+}
+
+/* WebKit for Chrome/Safari */
+.dotsProgress::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default WebKit thumb */
+  appearance: none;
+  width: 30px; /* Width of the SVG image */
+  height: 30px; /* Height of the SVG image */
+  background: url("../../Assets//Vector.svg") no-repeat center center; /* Use your SVG image */
+  background-size: cover; /* Ensure the image covers the thumb */
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+}
+
+/* Mozilla Firefox */
+.dotsProgress::-moz-range-thumb {
+  width: 40px; /* Width of the SVG image */
+  height: 40px; /* Height of the SVG image */
+  background: url("../../Assets//Vector.svg") no-repeat center center;
+  background-size: cover;
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+}
+
+/* Styling the range track (for WebKit) */
+.dotsProgress::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  background: #dddddd00;
+  border-radius: 5px;
+}
+
+/* Styling the range track (for Firefox) */
+.dotsProgress::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  background: #dddddd00;
+  border-radius: 5px;
+}
