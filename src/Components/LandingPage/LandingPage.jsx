@@ -1,7 +1,12 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { easeInOut, motion } from "framer-motion";
 import "./LandingPage.css";
 import v from "../../Assets/Vector.svg";
+import ColorChanger from "../ColorChanger/ColorChanger";
+import { useDispatch, useSelector } from "react-redux";
+import { changeColor } from "../../Redux/ColorReducer";
+import bhide from "../../Assets/Bhide.png";
+import subtitle from "../../Assets/subtitle.png";
 const textMotion = {
   rest: {
     color: "grey",
@@ -46,167 +51,181 @@ const dots = {
 };
 
 export default function LandingPage() {
-  const [progress, setProgress] = useState(0);
+  const { bgColor, textColor } = useSelector((state) => state.changeColor);
+
+  const [progress, setProgress] = useState(1);
   const [hovered, setHovered] = useState(false);
-  const [bg, setBg] = useState("#000");
-  const [textColor, setTextColor] = useState("#fff");
-
+  const [bg, setBg] = useState("");
+  const [tc, setTc] = useState("");
+  const [isloading, setIsloading] = useState(true);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (textColor) {
+      setTc(textColor);
+    }
+  }, [textColor, bgColor]);
   const handleProgress = (e) => {
-    console.log(e.target.value);
-
     setProgress(e.target.value);
-
-    handleColorChange();
+    handleColorChange(e.target.value);
   };
-  const handleColorChange = () => {
-    console.log("color change");
+  const handleColorChange = (v) => {
+    // console.log("color change");
 
-    switch (progress) {
+    switch (v) {
       case "0":
-        setBg("#fff");
-        setTextColor("#000");
-
+        dispatch(changeColor({ bg: "#fff", textColorAll: "#000" }));
         break;
       case "1":
-        setBg("#000");
-        setTextColor("#fff");
+        dispatch(changeColor({ bg: "#000", textColorAll: "#fff" }));
         break;
       case "2":
-        setBg("#583a3a");
-        setTextColor("#e8bfbf");
+        dispatch(changeColor({ bg: "#583a3a", textColorAll: "#e8bfbf" }));
         break;
       case "3":
-        setBg("#1e1818");
-        setTextColor("#6e6262");
+        dispatch(changeColor({ bg: "#1e1818", textColorAll: "#6e6262" }));
         break;
       case "4":
-        setBg("#263722");
-        setTextColor("#99d88a");
+        dispatch(changeColor({ bg: "#263722", textColorAll: "#99d88a" }));
         break;
       case "5":
-        setBg("#142f27");
-        setTextColor("#60d8b5");
+        dispatch(changeColor({ bg: "#142f27", textColorAll: "#60d8b5" }));
         break;
       case "6":
-        setBg("#232f3e");
-        setTextColor("#789fd0");
+        dispatch(changeColor({ bg: "#232f3e", textColorAll: "#789fd0" }));
         break;
       case "7":
-        setBg("#20172c");
-        setTextColor("#a986d8");
+        dispatch(changeColor({ bg: "#20172c", textColorAll: "#a986d8" }));
         break;
       case "8":
-        setBg("#201321");
-        setTextColor("#b96dbe");
+        dispatch(changeColor({ bg: "#201321", textColorAll: "#b96dbe" }));
         break;
       case "9":
-        setBg("#2b1d23");
-        setTextColor("#78636c");
+        dispatch(changeColor({ bg: "#2b1d23", textColorAll: "#78636c" }));
         break;
 
       default:
-        setBg("#000");
-        setTextColor("#fff");
+        dispatch(changeColor({ bg: "#000", textColorAll: "#fff" }));
         break;
     }
   };
   return (
     // main
-    <motion.div
-      style={{
-        backgroundColor: bg,
-      }}
-      className="h-[100vh] w-full flex justify-start items-center px-8"
-    >
-      {/* Options */}
-      <div>
-        <div className="text-white fixed ">
-          <div>Intro</div>
-          <div>Work</div>
-          <div>Values</div>
-          <div>Background</div>
-          <div>Contact</div>
-        </div>
-        {/* color changer */}
-        <motion.div
-          className="-rotate-[90deg] fixed bottom-[300px] -left-[175px]"
-          style={{
-            width: "450px",
-            height: "50px",
-          }}
-        >
-          {/* proress wrapper */}
-          <motion.div
-            initial="rest"
-            whileHover="hover"
-            whileFocus="hover"
-            animate="rest"
-            variants={textMotion}
-            onHoverStart={() => setHovered(true)}
-            onHoverEnd={() => setHovered(false)}
-            className="p-wrapper flex flex-col justify-start items-center"
-          >
-            {/* dots */}
-            <motion.div className="dots">
-              <>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-                <motion.div variants={dots} className="dot"></motion.div>
-              </>
-            </motion.div>
-            <input
-              className="dotsProgress"
-              type="range"
-              min={0}
-              max={17}
-              step={1}
-              onChange={(e) => {
-                handleProgress(e);
-              }}
-              value={hovered ? progress : 0}
-            />
-            {/* Image Overlay that moves with range */}
-            {/* <motion.div
-            className="image-overlay"
-            style={{
-              position: "absolute",
-              top: "0px", // Adjust as needed
-            }}
-            initial={{ left: 0 }}
-            animate={{ left: imagePosition }}
-            transition={{ duration: 0.3 }}
-          >
-            <img
-              src={v}
-              style={{
-                height: "25px",
-                width: "25px",
-              }}
-              alt="overlay"
-              width="40px"
-            />
-          </motion.div> */}
-          </motion.div>
-        </motion.div>
-      </div>
-      
-      <div>
+    <motion.div className="h-[100vh] w-[100%] flex flex-col justify-center items-center">
+      {/* navbar */}
 
+      {/* Options */}
+      <div className="grid grid-cols-4 w-[100%] gap-4 px-[64px]">
+        <div className="w-[100%] ">
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 100,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 1,
+                easings: "ease",
+              },
+            }}
+            style={{
+              color: tc,
+            }}
+            className="fixed hidden sm:block pt-[20px] "
+          >
+            <div className="text-[20px]">Intro</div>
+            <div className="text-[20px]">Work</div>
+            <div className="text-[20px]">Values</div>
+            <div className="text-[20px]">Background</div>
+            <div className="text-[20px]">Contact</div>
+          </motion.div>
+          <div>
+            <ColorChanger
+              setHovered={setHovered}
+              handleProgress={handleProgress}
+              hovered={hovered}
+              progress={progress}
+            />
+          </div>
+          {/* color changer */}
+        </div>
+        {/* Main text */}
+        <motion.div
+          style={{
+            color: tc,
+          }}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+            transition: {
+              duration: 3,
+              easings: "ease",
+            },
+          }}
+          className="col-span-3 sm:col-span-4 md:col-span-3 text-[24px] font-[700] md:text-[32px] lg:text-[64px]"
+        >
+          Hello there, I’m a UX designer
+          <br /> who cares about making <br />
+          beautiful things that <br />
+          helps people.
+        </motion.div>
       </div>
     </motion.div>
   );
 }
+
+// const LoaderComponent = ({ setIsloading }) => {
+//   const container = {
+//     start: {
+//       height: "100vh",
+//     },
+//     process: {
+//       height: "20vh",
+//       transition: {
+//         duration: 1,
+//         ease: easeInOut,
+//         delay: 1,
+//       },
+//     },
+//     end: {
+//       opacity: 0,
+//     },
+//   };
+//   const first = {
+//     start: {
+//       width: 400,
+//     },
+//     process: {
+//       width: 90,
+//       transition: {
+//         duration: 1,
+//         ease: easeInOut,
+//         delay: 1,
+//       },
+//     },
+//     end: {
+//       opacity: 0,
+//     },
+//   };
+//   useEffect(() => {
+//     const timer = setTimeout(() => {
+//       setIsloading(false);
+//     }, 3000);
+//     return () => clearTimeout(timer);
+//   });
+//   return (
+//     <motion.div
+//       variants={container}
+//       initial="start"
+//       animate="process"
+//       exit="end"
+//       className="bg-transparent w-full absolute top-0 text-white flex justify-between px-[24px] items-center"
+//     >
+//       <motion.img variants={first} src={bhide} />
+//       <motion.img variants={first} src={subtitle} />
+//     </motion.div>
+//   );
+// };
