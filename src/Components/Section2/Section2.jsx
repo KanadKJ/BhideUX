@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
+import { motion } from "framer-motion";
+import {
+  inViewVariantType1,
+  inViewVariantType2,
+} from "../../Redux/InviewVariant";
 // color calculator
 const hexToRgb = (hex) => {
   let r = 0,
@@ -65,13 +69,19 @@ export default function Section2() {
   }, [textColor, bgColor]);
 
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-5 gap-14 px-4 md:px-0">
+    <div className="w-full mt-16 grid grid-cols-1 md:grid-cols-5 gap-14 px-4 md:px-0">
       {details.map((e, index) => (
-        <div
+        <motion.div
           key={index}
           style={{
             backgroundColor: bc,
           }}
+          variants={inViewVariantType2}
+          viewport={{
+            once: true,
+          }}
+          initial="initial"
+          whileInView="animate"
           className="col-start-2 col-end-6 h-auto md:h-[435px] p-6 md:px-[76px] flex flex-col md:flex-row justify-between items-center gap-6 md:gap-12"
         >
           <div className="flex justify-center md:justify-start">
@@ -104,7 +114,7 @@ export default function Section2() {
               See more
             </a>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );

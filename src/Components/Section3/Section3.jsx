@@ -1,25 +1,88 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
+import { motion } from "framer-motion";
+import {
+  inViewVariantForChildrens,
+  inViewVariantType1,
+  inViewVariantType2,
+} from "../../Redux/InviewVariant";
 export default function Section3() {
   const { bgColor, textColor } = useSelector((state) => state.changeColor);
 
   return (
-    <div className="w-full h-full grid grid-cols-1 md:grid-cols-4 pt-10 md:pt-20 gap-8  md:pr-[7.5rem] md:pl-[4.5rem]">
+    <motion.div className="w-full h-full grid grid-cols-1 md:grid-cols-4 pt-10 md:pt-20 gap-8  md:pr-[7.5rem] md:pl-[4.5rem]">
       {/* First Section */}
-      <div className="col-start-1 md:col-start-2 md:col-end-5 h-auto md:h-[435px] gap-8 grid grid-cols-1 md:grid-cols-2">
-        <div
-          className="text-[36px] md:text-[64px] font-bold px-4 md:px-0"
-          style={{
-            color: textColor,
-          }}
-        >
-          Useful Considered Beautiful Well made
-        </div>
-      </div>
+      <motion.div className="col-start-1 md:col-start-2 md:col-end-5 h-auto md:h-[435px] gap-8 grid grid-cols-1 md:grid-cols-2">
+        <motion.div>
+          <motion.div
+            viewport={{
+              once: true,
+            }}
+            initial="initial"
+            whileInView="animate"
+            variants={inViewVariantForChildrens}
+            className="text-[36px] md:text-[64px] font-bold px-4 md:px-0"
+            style={{
+              color: textColor,
+            }}
+          >
+            Useful
+          </motion.div>
+          <motion.div
+            viewport={{
+              once: true,
+            }}
+            initial="initial"
+            whileInView="animate"
+            variants={inViewVariantForChildrens}
+            className="text-[36px] md:text-[64px] font-bold px-4 md:px-0"
+            style={{
+              color: textColor,
+            }}
+          >
+            Considered
+          </motion.div>
+          <motion.div
+            viewport={{
+              once: true,
+            }}
+            initial="initial"
+            whileInView="animate"
+            variants={inViewVariantForChildrens}
+            className="text-[36px] md:text-[64px] font-bold px-4 md:px-0"
+            style={{
+              color: textColor,
+            }}
+          >
+            Beautiful
+          </motion.div>
+          <motion.div
+            viewport={{
+              once: true,
+            }}
+            initial="initial"
+            whileInView="animate"
+            variants={inViewVariantForChildrens}
+            className="text-[36px] md:text-[64px] font-bold px-4 md:px-0"
+            style={{
+              color: textColor,
+            }}
+          >
+            Well made
+          </motion.div>
+        </motion.div>
+      </motion.div>
 
       {/* Second Section */}
-      <div className="col-start-1 md:col-start-2 md:col-end-5 h-auto md:h-[435px] gap-8 grid grid-cols-1 md:grid-cols-2">
+      <motion.div
+        viewport={{
+          once: true,
+        }}
+        initial="initial"
+        whileInView="animate"
+        variants={inViewVariantType1}
+        className="col-start-1 md:col-start-2 md:col-end-5 h-auto md:h-[435px] gap-8 grid grid-cols-1 md:grid-cols-2"
+      >
         <div
           className=" text-[16px] md:text-[20px] md:col-start-2 px-4 md:px-0"
           style={{
@@ -35,10 +98,18 @@ export default function Section3() {
           to improvement and excellence. My work strives for a larger purpose,
           aiming to leave the world better than I found it.
         </div>
-      </div>
+      </motion.div>
 
       {/* Third Section */}
-      <div className="col-start-1 md:col-start-2 md:col-end-5 h-auto md:h-[435px] gap-8 grid grid-cols-1 md:grid-cols-2">
+      <motion.div
+        viewport={{
+          once: true,
+        }}
+        initial="initial"
+        whileInView="animate"
+        variants={inViewVariantType1}
+        className="col-start-1 md:col-start-2 md:col-end-5 h-auto md:h-[435px] gap-8 grid grid-cols-1 md:grid-cols-2"
+      >
         <div
           className="text-[16px] md:text-[20px] px-4 md:px-0"
           style={{
@@ -56,7 +127,7 @@ export default function Section3() {
           curiosity, high craft, and adaptability, enable me to generate impact
           in our ever-changing environment.
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

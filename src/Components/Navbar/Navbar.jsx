@@ -4,6 +4,9 @@ import sub from "../../Assets/subtitle.png";
 import { easeOut, motion } from "framer-motion";
 
 export default function Navbar() {
+    function name(params) {
+        
+    }
   const expand = {
     start: {
       height: 40,
